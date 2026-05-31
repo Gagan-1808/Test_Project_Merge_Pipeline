@@ -1,13 +1,17 @@
 pipeline {
     agent any
 
-
+    environment {
+        APPROVER_EMAIL    = 'mayankchhimwal1999@gmail.com, lalitmudila09@gmail.com'
+        REPO_NAME         = 'https://github.com/Gagan-1808/Test_Project_Merge_Pipeline.git'
+    }
+    
     stages {
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/Gagan-1808/SampleSonar.git'
+                git branch: 'dev',
+                    url: 'https://github.com/Gagan-1808/Test_Project_Merge_Pipeline.git'
             }
         }
 
@@ -57,7 +61,7 @@ pipeline {
            stage('Notify – Quality Gate Passed') {
             steps {
                 mail(
-                    to: "gagan.patwal.1@gmail.com",
+                    to: ${env.APPROVER_EMAIL},
                     subject: "✅ Sample Python Project - SonarQube Quality Gate Passed – Build #${env.BUILD_NUMBER}",
                     body: """
 Hi,
@@ -65,11 +69,11 @@ Hi,
 Good news! The SonarQube Quality Gate has PASSED for the latest build.
 
 ──────────────────────────────────────────
-Project     : "Sample Python Project"
-Branch      : main
+Project     : "Test_Project_Merge_Pipeline"
+Branch      : "dev"
 Build #     : ${env.BUILD_NUMBER}
 Build URL   : ${env.BUILD_URL}
-Repository  : "https://github.com/Gagan-1808/SampleSonar.git"
+Repository  : ${env.REPO_NAME}
 ──────────────────────────────────────────
 
 All checks have passed:
