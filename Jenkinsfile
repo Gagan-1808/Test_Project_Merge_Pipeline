@@ -61,7 +61,7 @@ pipeline {
            stage('Notify – Quality Gate Passed') {
             steps {
                 mail(
-                    to: ${env.APPROVER_EMAIL},
+                    to: "${env.APPROVER_EMAIL}",
                     subject: "✅ Sample Python Project - SonarQube Quality Gate Passed – Build #${env.BUILD_NUMBER}",
                     body: """
 Hi,
@@ -71,9 +71,9 @@ Good news! The SonarQube Quality Gate has PASSED for the latest build.
 ──────────────────────────────────────────
 Project     : "Test_Project_Merge_Pipeline"
 Branch      : "dev"
-Build #     : ${env.BUILD_NUMBER}
-Build URL   : ${env.BUILD_URL}
-Repository  : ${env.REPO_NAME}
+Build #     : "${env.BUILD_NUMBER}"
+Build URL   : "${env.BUILD_URL}"
+Repository  : "${env.REPO_NAME}"
 ──────────────────────────────────────────
 
 All checks have passed:
