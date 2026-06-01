@@ -100,10 +100,20 @@ Jenkins CI
 
         success {
             echo 'Pipeline SUCCESS 🚀'
+            githubNotify(
+            context: 'continuous-integration/jenkins/pr-merge',
+            status: 'SUCCESS',
+            description: 'Pipeline passed'
+            )
         }
 
         failure {
             echo 'Pipeline FAILED ❌'
+            githubNotify(
+            context: 'continuous-integration/jenkins/pr-merge',
+            status: 'FAILURE',
+            description: 'Pipeline failed'
+            )
         }
     }
 }
